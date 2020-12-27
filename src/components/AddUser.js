@@ -1,19 +1,14 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, Modal, message } from "antd";
 import { db } from "../services/firebase";
 
-const AddUser = () => {
+const AddUser = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [form] = Form.useForm();
+  const { arrUsers } = props;
 
   const showModal = () => {
     setModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setModalVisible(false);
   };
 
   const handleCancel = () => {
@@ -24,22 +19,34 @@ const AddUser = () => {
     form.resetFields();
   };
 
+  const checkRFID = (rfid) => {
+    for (let user in arrUsers) {
+      if (rfid === arrUsers[user].rfid) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const onFinish = (values) => {
     const itemsRef = db.ref("Users");
     const { name, rfid, pin } = values;
     const createdDate = new Date().toLocaleDateString();
     const createdTime = new Date().toLocaleTimeString();
-    const item = {
-      name: name,
-      rfid: rfid,
-      pin: pin,
-      created_by_date: createdDate,
-      created_by_time: createdTime,
-    };
-    itemsRef.push(item);
-    setModalVisible(false);
-    onReset();
-    console.log("values", values);
+    if (!checkRFID(rfid)) {
+      const item = {
+        name: name,
+        rfid: rfid,
+        pin: pin,
+        created_by_date: createdDate,
+        created_by_time: createdTime,
+      };
+      itemsRef.push(item);
+      setModalVisible(false);
+      onReset();
+    } else {
+      message.error("RFID existed !");
+    }
   };
 
   return (
@@ -47,7 +54,6 @@ const AddUser = () => {
       <Modal
         title="Add new user"
         visible={isModalVisible}
-        onOk={handleOk}
         onCancel={handleCancel}
         footer={false}
       >
@@ -79,10 +85,11 @@ const AddUser = () => {
               {
                 required: true,
                 message: "Please input your RFID",
+                pattern: /^[0-9]+$/,
               },
             ]}
           >
-            <Input.Password />
+            <Input.Password type="number" />
           </Form.Item>
 
           <Form.Item
@@ -92,6 +99,7 @@ const AddUser = () => {
               {
                 required: true,
                 message: "Please input your pin",
+                pattern: /^[0-9]+$/,
               },
             ]}
           >
@@ -99,7 +107,7 @@ const AddUser = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading}>
+            <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
