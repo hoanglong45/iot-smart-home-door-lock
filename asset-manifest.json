@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/css/main.71019682.chunk.css",
+    "main.js": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/main.b5bfe786.chunk.js",
+    "main.js.map": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/main.b5bfe786.chunk.js.map",
+    "runtime-main.js": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/runtime-main.50784112.js",
+    "runtime-main.js.map": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/runtime-main.50784112.js.map",
+    "static/css/2.b00201c5.chunk.css": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/css/2.b00201c5.chunk.css",
+    "static/js/2.129de6e2.chunk.js": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/2.129de6e2.chunk.js",
+    "static/js/2.129de6e2.chunk.js.map": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/2.129de6e2.chunk.js.map",
+    "index.html": "/hoanglong45.github.io/iot-smart-home-door-lock-client/index.html",
+    "static/css/2.b00201c5.chunk.css.map": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/css/2.b00201c5.chunk.css.map",
+    "static/css/main.71019682.chunk.css.map": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/css/main.71019682.chunk.css.map",
+    "static/js/2.129de6e2.chunk.js.LICENSE.txt": "/hoanglong45.github.io/iot-smart-home-door-lock-client/static/js/2.129de6e2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.50784112.js",
+    "static/css/2.b00201c5.chunk.css",
+    "static/js/2.129de6e2.chunk.js",
+    "static/css/main.71019682.chunk.css",
+    "static/js/main.b5bfe786.chunk.js"
+  ]
+}
