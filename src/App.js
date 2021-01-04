@@ -33,7 +33,7 @@ const App = () => {
       localStorage.removeItem("token");
       setIsLogin(false);
     });
-    window.location.replace("/dashboard/");
+    window.location.replace("/iot-smart-home-door-lock-client/");
   }
 
   return (
@@ -44,16 +44,16 @@ const App = () => {
             <div className="logo" />
             <Menu
               theme="dark"
-              defaultSelectedKeys={["/dashboard/access-log"]}
+              defaultSelectedKeys={["/iot-smart-home-door-lock-client/access-log"]}
               mode="inline"
             >
               <Menu.Item key="/access-log" icon={<DashboardOutlined />}>
                 Access Log
-                <Link to="/dashboard/access-log" />
+                <Link to="/iot-smart-home-door-lock-client/access-log" />
               </Menu.Item>
               <Menu.Item key="/user-info" icon={<UserOutlined />}>
                 User Information
-                <Link to="/dashboard/user-info" />
+                <Link to="/iot-smart-home-door-lock-client/user-info" />
               </Menu.Item>
               <div className="button-logout"></div>
               <Menu.Item icon={<LogoutOutlined />}>
@@ -77,8 +77,8 @@ const App = () => {
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: "0 16px" }}>
               <Switch>
-                <Route exact path="/dashboard/user-info" component={EditableTable} />
-                <Route exact path="/dashboard/access-log" component={AccessLog} />
+                <Route exact path="/iot-smart-home-door-lock-client/user-info" component={EditableTable} />
+                <Route exact path="/iot-smart-home-door-lock-client/access-log" component={AccessLog} />
               </Switch>
             </Content>
             <Footer style={{ textAlign: "center" }}>

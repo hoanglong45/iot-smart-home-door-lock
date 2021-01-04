@@ -16,7 +16,7 @@ const Login = (props) => {
         if (token) {
           setIsLogin(true);
           localStorage.setItem("token", token);
-          return history.push("/dashboard/access-log");
+          return history.push("/iot-smart-home-door-lock-client/access-log");
         }
       })
       .catch(() => {
