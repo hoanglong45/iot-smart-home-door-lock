@@ -33,7 +33,7 @@ const App = () => {
       localStorage.removeItem("token");
       setIsLogin(false);
     });
-    window.location.replace("/");
+    window.location.replace("/dashboard/");
   }
 
   return (
@@ -44,16 +44,16 @@ const App = () => {
             <div className="logo" />
             <Menu
               theme="dark"
-              defaultSelectedKeys={["/access-log"]}
+              defaultSelectedKeys={["/dashboard/access-log"]}
               mode="inline"
             >
               <Menu.Item key="/access-log" icon={<DashboardOutlined />}>
                 Access Log
-                <Link to="/access-log" />
+                <Link to="/dashboard/access-log" />
               </Menu.Item>
               <Menu.Item key="/user-info" icon={<UserOutlined />}>
                 User Information
-                <Link to="/user-info" />
+                <Link to="/dashboard/user-info" />
               </Menu.Item>
               <div className="button-logout"></div>
               <Menu.Item icon={<LogoutOutlined />}>
@@ -77,8 +77,8 @@ const App = () => {
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: "0 16px" }}>
               <Switch>
-                <Route exact path="/user-info" component={EditableTable} />
-                <Route exact path="/access-log" component={AccessLog} />
+                <Route exact path="/dashboard/user-info" component={EditableTable} />
+                <Route exact path="/dashboard/access-log" component={AccessLog} />
               </Switch>
             </Content>
             <Footer style={{ textAlign: "center" }}>
