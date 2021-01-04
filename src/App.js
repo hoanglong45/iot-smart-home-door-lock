@@ -20,6 +20,7 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(() => {
     const isHaveToken = localStorage.getItem("token");
     if (isHaveToken) {
+      window.location.replace("/iot-smart-home-door-lock-client/access-log");
       return true;
     }
     return false;
@@ -44,7 +45,7 @@ const App = () => {
             <div className="logo" />
             <Menu
               theme="dark"
-              defaultSelectedKeys={["/iot-smart-home-door-lock-client/access-log"]}
+              defaultSelectedKeys={["/access-log"]}
               mode="inline"
             >
               <Menu.Item key="/access-log" icon={<DashboardOutlined />}>
