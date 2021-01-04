@@ -1,0 +1,48 @@
+.container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url("../../images/background.jpg");
+  background-size: cover;
+  .form {
+    width: 450px;
+    height: auto;
+    // display: flex;
+    // flex-wrap: wrap;
+    box-shadow: 4px 4px 12px -3px rgba(0, 0, 0, 0.52);
+    border-radius: 10px;
+    padding: 30px;
+    background: white;
+    h1 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .ant-form-item {
+      .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+          height: auto;
+          padding: 10px 40px;
+          font-size: 16px;
+        }
+      }
+    }
+    .ant-form-item-label {
+      flex: 0 0 25%;
+      max-width: 100%;
+      text-align: left;
+    }
+    .error {
+      font-style: italic;
+      color: red;
+    }
+  }
+}
+
+// nested
