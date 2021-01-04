@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/iot-smart-home-door-lock-client/static/css/main.773bd857.chunk.css",
-    "main.js": "/iot-smart-home-door-lock-client/static/js/main.659fa84f.chunk.js",
-    "main.js.map": "/iot-smart-home-door-lock-client/static/js/main.659fa84f.chunk.js.map",
+    "main.js": "/iot-smart-home-door-lock-client/static/js/main.9cd7afed.chunk.js",
+    "main.js.map": "/iot-smart-home-door-lock-client/static/js/main.9cd7afed.chunk.js.map",
     "runtime-main.js": "/iot-smart-home-door-lock-client/static/js/runtime-main.1cd19a65.js",
     "runtime-main.js.map": "/iot-smart-home-door-lock-client/static/js/runtime-main.1cd19a65.js.map",
     "static/css/2.b00201c5.chunk.css": "/iot-smart-home-door-lock-client/static/css/2.b00201c5.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.b00201c5.chunk.css",
     "static/js/2.d6ac4dba.chunk.js",
     "static/css/main.773bd857.chunk.css",
-    "static/js/main.659fa84f.chunk.js"
+    "static/js/main.9cd7afed.chunk.js"
   ]
 }
