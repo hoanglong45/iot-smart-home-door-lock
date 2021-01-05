@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import AccessLog from "./components/AccessLog";
 import EditableTable from "./components/EditableTable";
-import Login from "./components/Login/index";
+import Login from "./components/Login";
 import { auth } from "./services/firebase";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -20,7 +20,7 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(() => {
     const isHaveToken = localStorage.getItem("token");
     if (isHaveToken) {
-      window.location.replace("/iot-smart-home-door-lock-client/access-log");
+      // window.location.replace("/iot-smart-home-door-lock-client/access-log");
       return true;
     }
     return false;
