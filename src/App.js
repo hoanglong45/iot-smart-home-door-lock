@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import { Layout, Menu } from "antd";
 import "./App.css";
@@ -34,7 +34,7 @@ const App = () => {
       localStorage.removeItem("token");
       setIsLogin(false);
     });
-    window.location.replace("/iot-smart-home-door-lock-client/");
+    window.location.replace("/");
   }
 
   return (
@@ -50,11 +50,11 @@ const App = () => {
             >
               <Menu.Item key="/access-log" icon={<DashboardOutlined />}>
                 Access Log
-                <Link to="/iot-smart-home-door-lock-client/access-log" />
+                <Link to="/access-log" />
               </Menu.Item>
               <Menu.Item key="/user-info" icon={<UserOutlined />}>
                 User Information
-                <Link to="/iot-smart-home-door-lock-client/user-info" />
+                <Link to="/user-info" />
               </Menu.Item>
               <div className="button-logout"></div>
               <Menu.Item icon={<LogoutOutlined />}>
@@ -78,8 +78,8 @@ const App = () => {
             <Header className="site-layout-background" style={{ padding: 0 }} />
             <Content style={{ margin: "0 16px" }}>
               <Switch>
-                <Route exact path="/iot-smart-home-door-lock-client/user-info" component={EditableTable} />
-                <Route exact path="/iot-smart-home-door-lock-client/access-log" component={AccessLog} />
+                <Route exact path="/user-info" component={EditableTable} />
+                <Route exact path="/access-log" component={AccessLog} />
               </Switch>
             </Content>
             <Footer style={{ textAlign: "center" }}>
