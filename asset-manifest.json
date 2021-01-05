@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/iot-smart-home-door-lock-client/static/css/main.773bd857.chunk.css",
-    "main.js": "/iot-smart-home-door-lock-client/static/js/main.6cc96a76.chunk.js",
-    "main.js.map": "/iot-smart-home-door-lock-client/static/js/main.6cc96a76.chunk.js.map",
+    "main.js": "/iot-smart-home-door-lock-client/static/js/main.ef88b571.chunk.js",
+    "main.js.map": "/iot-smart-home-door-lock-client/static/js/main.ef88b571.chunk.js.map",
     "runtime-main.js": "/iot-smart-home-door-lock-client/static/js/runtime-main.1cd19a65.js",
     "runtime-main.js.map": "/iot-smart-home-door-lock-client/static/js/runtime-main.1cd19a65.js.map",
     "static/css/2.b00201c5.chunk.css": "/iot-smart-home-door-lock-client/static/css/2.b00201c5.chunk.css",
-    "static/js/2.d6ac4dba.chunk.js": "/iot-smart-home-door-lock-client/static/js/2.d6ac4dba.chunk.js",
-    "static/js/2.d6ac4dba.chunk.js.map": "/iot-smart-home-door-lock-client/static/js/2.d6ac4dba.chunk.js.map",
+    "static/js/2.3b9371d5.chunk.js": "/iot-smart-home-door-lock-client/static/js/2.3b9371d5.chunk.js",
+    "static/js/2.3b9371d5.chunk.js.map": "/iot-smart-home-door-lock-client/static/js/2.3b9371d5.chunk.js.map",
     "index.html": "/iot-smart-home-door-lock-client/index.html",
     "static/css/2.b00201c5.chunk.css.map": "/iot-smart-home-door-lock-client/static/css/2.b00201c5.chunk.css.map",
     "static/css/main.773bd857.chunk.css.map": "/iot-smart-home-door-lock-client/static/css/main.773bd857.chunk.css.map",
-    "static/js/2.d6ac4dba.chunk.js.LICENSE.txt": "/iot-smart-home-door-lock-client/static/js/2.d6ac4dba.chunk.js.LICENSE.txt",
+    "static/js/2.3b9371d5.chunk.js.LICENSE.txt": "/iot-smart-home-door-lock-client/static/js/2.3b9371d5.chunk.js.LICENSE.txt",
     "static/media/style.scss": "/iot-smart-home-door-lock-client/static/media/background.01d59b36.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.1cd19a65.js",
     "static/css/2.b00201c5.chunk.css",
-    "static/js/2.d6ac4dba.chunk.js",
+    "static/js/2.3b9371d5.chunk.js",
     "static/css/main.773bd857.chunk.css",
-    "static/js/main.6cc96a76.chunk.js"
+    "static/js/main.ef88b571.chunk.js"
   ]
 }
