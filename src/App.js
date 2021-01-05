@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
-
 import { Layout, Menu } from "antd";
 import "./App.css";
 import {
@@ -20,7 +19,6 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(() => {
     const isHaveToken = localStorage.getItem("token");
     if (isHaveToken) {
-      // window.location.replace("/iot-smart-home-door-lock-client/access-log");
       return true;
     }
     return false;
@@ -34,7 +32,7 @@ const App = () => {
       localStorage.removeItem("token");
       setIsLogin(false);
     });
-    window.location.replace("/");
+    window.location.replace("/iot-smart-home-door-lock-client");
   }
 
   return (

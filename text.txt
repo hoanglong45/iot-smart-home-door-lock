@@ -13,3 +13,15 @@ about background
     1. background-image => choose image to set background
     2. background-color => choose color bla bla bla
     3. background => both ( can be image || color )
+
+    <React.Fragment>
+    {isLogin?   <Router>
+            <Switch>
+            <Route exact path="/access-log" component={accessLog} /> 
+            <Route exact path="/user-info" component={userInfo} />
+            <Route  exact path="/login" component={} />
+            </Switch>
+        </Router> : <Login />      }
+
+
+    </React.Fragment>
