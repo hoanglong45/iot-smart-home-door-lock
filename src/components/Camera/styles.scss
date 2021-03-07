@@ -1,3 +1,11 @@
-.container-camera {
-  margin-bottom: 30px;
+.container-camera-component {
+  .react-html5-camera-photo {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  video {
+    width: 100%;
+  }
 }

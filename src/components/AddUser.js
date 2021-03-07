@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Modal, message } from "antd";
-import { db } from "../services/firebase";
-import Camera from "./Camera";
+import { db, storage } from "../services/firebase";
+import CameraComponent from "./Camera";
 
 const styleBlockBtnAction = {
   display: "flex",
@@ -12,6 +12,7 @@ const AddUser = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [step, setStep] = useState(1);
   const [profile, setProfile] = useState("");
+  const [arrSrcImgReview, setArrSrcImgReview] = useState([]);
   const [form] = Form.useForm();
   const { arrUsers } = props;
 
@@ -53,18 +54,43 @@ const AddUser = (props) => {
   const handleSubmitProfile = () => {
     const itemsRef = db.ref("Users");
     const { name, rfid, pin } = profile;
-    const createdDate = new Date().toLocaleDateString();
-    const createdTime = new Date().toLocaleTimeString();
-    const item = {
-      name: name,
-      rfid: rfid,
-      pin: pin,
-      created_by_date: createdDate,
-      created_by_time: createdTime,
-    };
-    itemsRef.push(item);
-    setModalVisible(false);
-    onReset();
+
+    try {
+      arrSrcImgReview.map((srcImgReview, indexSrc) => {
+        const storageRef = storage.ref(
+          `Users/${name}-${rfid}/${rfid}.${indexSrc + 1}`
+        );
+        return storageRef
+          .putString(srcImgReview, "data_url")
+          .then((snapshot) => {
+            if (indexSrc === arrSrcImgReview.length - 1) {
+              const storageRefDefault = storage.ref(
+                `Users/${name}-${rfid}/${rfid}.1`
+              );
+              storageRefDefault.getDownloadURL().then((url) => {
+                const createdDate = new Date().toLocaleDateString();
+                const createdTime = new Date().toLocaleTimeString();
+                const item = {
+                  name: name,
+                  rfid: rfid,
+                  pin: pin,
+                  avatarUrl: url,
+                  created_by_date: createdDate,
+                  created_by_time: createdTime,
+                };
+                itemsRef.push(item);
+              });
+            }
+            console.log("Uploaded a data_url string!", snapshot);
+          });
+      });
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setModalVisible(false);
+      setArrSrcImgReview([]);
+      onReset();
+    }
   };
 
   const handlePrevStep = () => {
@@ -132,7 +158,7 @@ const AddUser = (props) => {
         );
       }
       case 2: {
-        return <Camera />;
+        return <CameraComponent setArrSrcImgReview={setArrSrcImgReview} />;
       }
       default:
         return null;
@@ -148,7 +174,6 @@ const AddUser = (props) => {
         footer={false}
       >
         {handleRenderContent(step)}
-        {console.log("profile", profile)}
         {step > 1 && (
           <div style={styleBlockBtnAction}>
             <Button type="primary" onClick={handlePrevStep}>

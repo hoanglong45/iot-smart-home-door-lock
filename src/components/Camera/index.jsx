@@ -1,84 +1,38 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import Camera from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css";
+import "./styles.scss";
 
-class Camera extends Component {
-  state = {
-    isTakePhoto: true,
+const CameraComponent = ({ setArrSrcImgReview }) => {
+  const [isFirstTimeClick, setIsFirstTimeClick] = useState(false);
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    const targetTrigger = document.getElementById("inner-circle");
+    if (targetTrigger && isFirstTimeClick) {
+      const counting = setTimeout(() => {
+        if (count > 2) {
+          return clearTimeout(counting);
+        }
+        targetTrigger.click();
+        return setCount((prevCount) => prevCount + 1);
+      }, 1000);
+    }
+  }, [isFirstTimeClick, count]);
+
+  const handleTakePhoto = (dataUri) => {
+    setIsFirstTimeClick(true);
+    setArrSrcImgReview((prevArrSrc) => [...prevArrSrc, dataUri]);
   };
-  /**
-   * Processes available devices and identifies one by the label
-   * @memberof CameraFeed
-   * @instance
-   */
-  processDevices(devices) {
-    devices.forEach((device) => {
-      console.log(device.label);
-      this.setDevice(device);
-    });
-  }
+  return (
+    <div className="container-camera-component">
+      <Camera
+        onTakePhoto={(dataUri) => {
+          handleTakePhoto(dataUri);
+        }}
+      />
+    </div>
+  );
+};
 
-  /**
-   * Sets the active device and starts playing the feed
-   * @memberof CameraFeed
-   * @instance
-   */
-  async setDevice(device) {
-    const { deviceId } = device;
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: { deviceId },
-    });
-    this.videoPlayer.srcObject = stream;
-    this.videoPlayer.play();
-  }
-
-  /**
-   * On mount, grab the users connected devices and process them
-   * @memberof CameraFeed
-   * @instance
-   * @override
-   */
-  async componentDidMount() {
-    const cameras = await navigator.mediaDevices.enumerateDevices();
-    this.processDevices(cameras);
-  }
-
-  /**
-   * Handles taking a still image from the video feed on the camera
-   * @memberof CameraFeed
-   * @instance
-   */
-  takePhoto = () => {
-    this.setState({ isTakePhoto: false });
-    const context = this.canvas.getContext("2d");
-    context.drawImage(this.videoPlayer, 0, 0, 472, 354);
-  };
-
-  handleTryAgain = () => {
-    this.setState({ isTakePhoto: true });
-  };
-
-  render() {
-    const { isTakePhoto } = this.state;
-    return (
-      <div className="c-camera-feed">
-        <div className="c-camera-feed__viewer">
-          {isTakePhoto && (
-            <>
-              <video
-                ref={(ref) => (this.videoPlayer = ref)}
-                width="100%"
-                height="100%"
-              />
-              <button onClick={this.takePhoto}>Take photo!</button>
-            </>
-          )}
-        </div>
-        <div className="c-camera-feed__stage" style={{ width: "100%" }}>
-          <canvas width="472" height="354" ref={(ref) => (this.canvas = ref)} />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Camera;
+export default CameraComponent;
