@@ -1,36 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Camera from "react-html5-camera-photo";
-import "react-html5-camera-photo/build/css/index.css";
-import "./styles.scss";
 
-const CameraComponent = ({ setArrSrcImgReview }) => {
-  const [isFirstTimeClick, setIsFirstTimeClick] = useState(false);
-  const [count, setCount] = useState(1);
-
+const CameraComponent = ({ rfid }) => {
+  const [srcImage, setSrcImage] = useState("");
   useEffect(() => {
-    const targetTrigger = document.getElementById("inner-circle");
-    if (targetTrigger && isFirstTimeClick) {
-      const counting = setTimeout(() => {
-        if (count > 2) {
-          return clearTimeout(counting);
-        }
-        targetTrigger.click();
-        return setCount((prevCount) => prevCount + 1);
-      }, 1000);
+    async function getImageUser(rfidUser) {
+      const res = await fetch(`http://localhost:5000/api/capture/${rfidUser}`);
+      console.log("res", res);
+      setSrcImage((prevState) => (prevState = res.url));
     }
-  }, [isFirstTimeClick, count]);
-
-  const handleTakePhoto = (dataUri) => {
-    setIsFirstTimeClick(true);
-    setArrSrcImgReview((prevArrSrc) => [...prevArrSrc, dataUri]);
-  };
+    getImageUser(rfid);
+  }, []);
   return (
     <div className="container-camera-component">
-      <Camera
-        onTakePhoto={(dataUri) => {
-          handleTakePhoto(dataUri);
-        }}
-      />
+      <img src={srcImage} alt="test" style={{ width: "100%" }} />
     </div>
   );
 };
