@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Modal, message } from "antd";
-import { db, storage } from "../services/firebase";
+import { db } from "../services/firebase";
 import CameraComponent from "./Camera";
 
 const styleBlockBtnAction = {
@@ -8,14 +8,14 @@ const styleBlockBtnAction = {
   justifyContent: "space-between",
   alignItems: "center",
 };
+
 const AddUser = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [step, setStep] = useState(1);
   const [profile, setProfile] = useState(null);
-  // const [arrSrcImgReview, setArrSrcImgReview] = useState([]);
+  const [srcImage, setSrcImage] = useState("");
   const [form] = Form.useForm();
   const { arrUsers } = props;
-
   const showModal = () => {
     setStep(1);
     onReset();
@@ -23,8 +23,11 @@ const AddUser = (props) => {
   };
 
   const handleCancel = () => {
+    fetch(`http://localhost:5000/api/capture/${profile.rfid}/cancel`);
     setStep(1);
     onReset();
+    setSrcImage("");
+    setProfile(null);
     setModalVisible(false);
   };
 
@@ -44,8 +47,8 @@ const AddUser = (props) => {
   const handleNextStep = (values) => {
     const { rfid } = values;
     if (rfid && !checkRFID(rfid)) {
-      setStep(step + 1);
       setProfile(values);
+      setStep(step + 1);
     } else {
       message.error("RFID existed !");
     }
@@ -72,6 +75,8 @@ const AddUser = (props) => {
       console.log("err", err);
     } finally {
       setModalVisible(false);
+      setSrcImage("");
+      setProfile(null);
       onReset();
     }
   };
@@ -141,7 +146,17 @@ const AddUser = (props) => {
         );
       }
       case 2: {
-        return <> {profile && <CameraComponent rfid={profile.rfid} />} </>;
+        return (
+          <>
+            {profile && (
+              <CameraComponent
+                rfid={profile.rfid}
+                srcImage={srcImage}
+                setSrcImage={setSrcImage}
+              />
+            )}
+          </>
+        );
       }
       default:
         return null;

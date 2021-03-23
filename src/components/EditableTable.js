@@ -60,7 +60,7 @@ const EditableTable = () => {
       const newArrUser = [];
       for (let user in userData) {
         newArrUser.push({
-          avatarUrl: userData[user].avatarUrl,
+          // avatarUrl: userData[user].avatarUrl,
           id: user,
           name: userData[user].name,
           rfid: userData[user].rfid,
@@ -220,17 +220,17 @@ const EditableTable = () => {
   };
 
   const columns = [
-    {
-      title: "avatar",
-      dataIndex: "avatarUrl",
-      render: (theImageURL) => (
-        <img
-          style={{ width: "100px", height: "100px", objectFit: "cover" }}
-          alt={theImageURL}
-          src={theImageURL}
-        />
-      ),
-    },
+    // {
+    //   title: "avatar",
+    //   dataIndex: "avatarUrl",
+    //   render: (theImageURL) => (
+    //     <img
+    //       style={{ width: "100px", height: "100px", objectFit: "cover" }}
+    //       alt={theImageURL}
+    //       src={theImageURL}
+    //     />
+    //   ),
+    // },
     {
       title: "name",
       dataIndex: "name",
