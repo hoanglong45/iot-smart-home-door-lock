@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Input, Button, Modal, message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, Modal, message, notification } from "antd";
 import { db } from "../services/firebase";
 import CameraComponent from "./Camera";
 
@@ -14,6 +14,7 @@ const AddUser = (props) => {
   const [step, setStep] = useState(1);
   const [profile, setProfile] = useState(null);
   const [srcImage, setSrcImage] = useState("");
+  const [statusAdding, setStatusAdding] = useState("");
   const [form] = Form.useForm();
   const { arrUsers } = props;
   const showModal = () => {
@@ -23,7 +24,9 @@ const AddUser = (props) => {
   };
 
   const handleCancel = () => {
-    fetch(`http://localhost:5000/api/capture/${profile.rfid}/cancel`);
+    if (profile) {
+      fetch(`http://localhost:5000/api/capture/${profile.rfid}/cancel`);
+    }
     setStep(1);
     onReset();
     setSrcImage("");
@@ -67,9 +70,10 @@ const AddUser = (props) => {
       created_by_time: createdTime,
     };
     itemsRef.push(item);
+    setStatusAdding("info");
     try {
       fetch(`http://localhost:5000/api/training`).then((res) =>
-        console.log("res", res)
+        setStatusAdding(res.status === 200 ? "success" : "error")
       );
     } catch (err) {
       console.log("err", err);
@@ -80,7 +84,36 @@ const AddUser = (props) => {
       onReset();
     }
   };
+  const openNotification = (type) => {
+    switch (type) {
+      case "success":
+        notification[type]({
+          message: "Success",
+          description: "Add user and training successfully",
+        });
+        break;
+      case "error":
+        notification[type]({
+          message: "Error",
+          description: "Too bad, try again later",
+        });
+        break;
+      case "info":
+        notification[type]({
+          message: "Loading",
+          description: "Training, wait a minutes",
+        });
+        break;
+      default:
+        break;
+    }
+  };
 
+  useEffect(() => {
+    if (statusAdding) {
+      return setTimeout(() => setStatusAdding(""), 3000);
+    }
+  }, [statusAdding]);
   const handlePrevStep = () => {
     setStep(step - 1);
   };
@@ -186,6 +219,7 @@ const AddUser = (props) => {
       <Button type="primary" onClick={showModal}>
         Add User
       </Button>
+      {statusAdding && openNotification(statusAdding)}
     </>
   );
 };

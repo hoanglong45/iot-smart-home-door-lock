@@ -109,11 +109,7 @@ const EditableTable = () => {
   };
 
   const save = async (id) => {
-    // const dayUpdate = new Date().toLocaleDateString();
-    // const timeUpdate = new Date().toLocaleTimeString();
-
     const itemTarget = db.ref(`Users/${id}`);
-
     const newData = [...data];
 
     const checkRFID = (rfid) => {
@@ -125,26 +121,35 @@ const EditableTable = () => {
       return false;
     };
 
+    const updatingProfile = (itemProcess, indexProcess, rowProcess) => {
+      openNotification("success");
+      newData.splice(indexProcess, 1, { ...itemProcess, ...rowProcess });
+      itemTarget.set({
+        ...rowProcess,
+        created_by_date: itemProcess.createdDate,
+        created_by_time: itemProcess.createdTime,
+      });
+      setData(newData);
+      setEditingKey("");
+    };
+
     try {
       const row = await form.validateFields();
       const index = newData.findIndex((item) => id === item.id);
+
       if (index > -1) {
         const item = newData[index];
-        const { createdDate, createdTime } = item;
+        if (item.rfid === row.rfid) {
+          if (item.name !== row.name || item.pin !== row.pin) {
+            return updatingProfile(item, index, row);
+          }
+          return setEditingKey("");
+        }
 
         if (checkRFID(row.rfid)) {
-          openNotification("error");
-        } else {
-          openNotification("success");
-          newData.splice(index, 1, { ...item, ...row });
-          itemTarget.set({
-            ...row,
-            created_by_date: createdDate,
-            created_by_time: createdTime,
-          });
-          setData(newData);
-          setEditingKey("");
+          return openNotification("error");
         }
+        return updatingProfile(item, index, row);
       } else {
         newData.push(row);
         setData(newData);
